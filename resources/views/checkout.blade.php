@@ -15,10 +15,23 @@
           <h4>Detail Booking Anda</h4>
         </div>
         <div class="card-body">
-          <form action="" method="POST">
+          <form action="{{route('checkout')}}" method="POST">
             @csrf
             <table class="table">
               <tbody>
+                <tr>
+                  <td class="text-fit fw-bold">Nama Penyewa</td>
+                  <td class="text-fit">:</td>
+                  <td>{{ $name }}</td>
+                  <input type="hidden" name="name" value="{{$name}}">
+                </tr>
+                <tr>
+                  <td class="text-fit fw-bold">No Tlp Penyewa</td>
+                  <td class="text-fit">:</td>
+                  <td>{{ $no_tlp }}</td>
+                  <input type="hidden" name="no_tlp" value="{{$no_tlp}}">
+                </tr>
+                <input type="hidden" name="selected_lapangan_id" value="{{$selected_lapangan->id}}">
                 <tr>
                   <td class="text-fit fw-bold">Jenis</td>
                   <td class="text-fit">:</td>
@@ -34,6 +47,26 @@
                   <td class="text-fit">:</td>
                   <td>Rp. {{ number_format($selected_lapangan->price) }}</td>
                 </tr>
+                @if ($sewa_sepatu)
+                  <tr>
+                    <td class="fw-bold text-fit">Sewa Sepatu</td>
+                    <td class="text-fit">:</td>
+                    <td>
+                      Rp. 50,000/jam
+                    </td>
+                    <input type="hidden" name="sewa_sepatu" value="{{$sewa_sepatu}}">
+                  </tr>
+                  @endif
+                @if ($sewa_kostum)
+                  <tr>
+                    <td class="fw-bold text-fit">Sewa Kostum</td>
+                    <td class="text-fit">:</td>
+                    <td>
+                      Rp. 45,000/jam
+                    </td>
+                    <input type="hidden" name="sewa_kostum" value="{{$sewa_kostum}}">
+                  </tr>
+                @endif
                 <tr>
                   <td class="fw-bold text-fit">Tgl Mulai</td>
                   <td class="text-fit">:</td>
@@ -50,11 +83,13 @@
                       value="{{ $date_end }}">
                   </td>
                 </tr>
+            
               </tbody>
             </table>
             <h4 class="d-flex justify-content-between">
               <span>Total Harga</span>
               <span class="text-primary fw-bold">Rp. {{ number_format($total_harga) }}</span>
+              <input type="hidden" name="total_harga" value="{{$total_harga}}">
             </h4>
 
             <button class="btn btn-primary w-100 mt-3" type="submit">Booking</button>

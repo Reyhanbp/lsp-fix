@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),
-            'role' => 'admin'
         ]);
         // =======================
         //      SEED LAPANGAN

@@ -14,7 +14,7 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         // berisi data booking user saat ini
-        $bs = Booking::where('user_id', Auth::user()->id)->get();
+        $bs = Booking::all();
         return view('booking', compact('bs'));
     }
 
@@ -26,48 +26,46 @@ class BookingController extends Controller
             ->where('lokasi', $request->lokasi)
             ->where('jenis', $request->jenis)
             ->first();
+
         $date_start = $request->date_start;
         $date_end = $request->date_end;
 
-        // total durasi dalam satuan menit (date_end - date_start)
-        $total_durasi = Carbon::parse($request->date_end)->diffInMinutes($request->date_start);
-        $total_harga = ($selected_lapangan->price / 60) * $total_durasi;
+        $is_exist = Booking::query()
+            ->where('lapangan_id', $selected_lapangan->id)
+            ->whereBetween('date_start', [$date_start, $date_end])
+            ->orWhereBetween('date_end', [$date_start, $date_end])
+            ->get();
 
-        return view('checkout', compact('selected_lapangan', 'date_start', 'date_end', 'total_harga'));
+            if (count($is_exist) > 0) {
+               return back()->with('failed-booking', $is_exist)->withInput($request->input());
+            }
+
+        $sewa_sepatu = $request->sewa_sepatu ? 50000 : 0;
+        $sewa_kostum = $request->sewa_kostum ? 450000 : 0;
+
+        // total durasi dalam satuan menit (date_end - date_start)
+        $total_durasi_in_minutes = Carbon::parse($request->date_end)->diffInMinutes($request->date_start);
+        $total_harga = (($selected_lapangan->price / 60) + $sewa_kostum + $sewa_sepatu) * $total_durasi_in_minutes;
+
+        $name = $request->name;
+        $no_tlp = $request->no_tlp;
+
+        return view('checkout', compact('selected_lapangan', 'date_start', 'date_end', 'total_harga', 'total_durasi_in_minutes', 'sewa_sepatu', 'sewa_kostum', 'name', 'no_tlp'));
     }
 
     // melakukan proses booking / checkout
     public function booking(Request $request)
     {
-        $selected_lapangan = Lapangan::query()
-            ->where('lokasi', $request->lokasi)
-            ->where('jenis', $request->jenis)
-            ->first();
-
-        // cek apakah ada jadwal booking yang bertubrukan dengan request booking
-        $is_exist = Booking::query()
-            ->where('lapangan_id', $selected_lapangan->id)
-            ->whereBetween('date_start', [$request->date_start, $request->date_end])
-            ->orWhereBetween('date_end', [$request->date_start, $request->date_end])
-            ->get();
-
-        // dd($is_exist);
-        if (count($is_exist) > 0) {
-            return back()->with('is_exist', $is_exist);
-        }
-
-
-        // total durasi dalam satuan menit (date_end - date_start)
-        $total_durasi = Carbon::parse($request->date_end)->diffInMinutes($request->date_start);
-        $total_harga = ($selected_lapangan->price / 60) * $total_durasi;
+        $selected_lapangan = Lapangan::find($request->selected_lapangan_id);
 
         Booking::create([
             'lapangan_id' => $selected_lapangan->id,
             'price' => $selected_lapangan->price,
-            'total_price' => $total_harga,
+            'total_price' => $request->total_harga,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
-            'user_id' => Auth::user()->id
+            'name' => $request->name,
+            'no_tlp' => $request->no_tlp,
         ]);
 
         return redirect('/')->with('success-booking');

@@ -15,20 +15,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
 Route::get('/regis', [AuthController::class, 'regisView'])->name('regis.view');
 Route::post('/regis', [AuthController::class, 'regis'])->name('regis.post');
 
-Route::get('/login', [AuthController::class, 'loginView'])->name('login.view');
+Route::get('/login', [AuthController::class, 'loginView'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
 
-Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
-Route::get('/booking/checkout', [BookingController::class, 'checkout'])->name('booking.checkout');
-Route::post('/booking/checkout', [BookingController::class, 'booking']);
+   
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
+    Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+    Route::post('/booking', [BookingController::class, 'checkout'])->name('booking.post');
+    Route::post('/booking/checkout', [BookingController::class, 'booking'])->name('checkout');
+
+    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
+});

@@ -17,12 +17,13 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('no_tlp');
             $table->double('price');
             $table->double('total_price');
             $table->dateTime('date_start');
             $table->dateTime('date_end');
             $table->foreignIdFor(Lapangan::class)->constrained();
-            $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
         });
     }
