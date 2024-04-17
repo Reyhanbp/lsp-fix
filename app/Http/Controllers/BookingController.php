@@ -45,8 +45,8 @@ class BookingController extends Controller
 
         // total durasi dalam satuan menit (date_end - date_start)
         $total_durasi_in_minutes = Carbon::parse($request->date_end)->diffInMinutes($request->date_start);
-        $total_harga = (($selected_lapangan->price / 60) + $sewa_kostum + $sewa_sepatu) * $total_durasi_in_minutes;
-
+        $total_harga = (($selected_lapangan->price / 60) + ($sewa_kostum /60) + ($sewa_sepatu/60)) * $total_durasi_in_minutes;
+            // dd($total_durasi_in_minutes, ($selected_lapangan->price / 60));
         $name = $request->name;
         $no_tlp = $request->no_tlp;
 
