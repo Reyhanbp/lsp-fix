@@ -89,7 +89,17 @@
             <h4 class="d-flex justify-content-between">
               <span>Total Harga</span>
               <span class="text-primary fw-bold">Rp. {{ number_format($total_harga) }}</span>
-              <input type="hidden" name="total_harga" value="{{$total_harga}}">
+              <input type="hidden" name="total_harga" id="total-harga" value="{{$total_harga}}">
+            </h4>
+            <h4 class="d-flex justify-content-between">
+              <span>Tunai</span>
+              <div class="d-flex">
+                <input type="number" style="text-align: end; padding-right: 0" class="form-control  " id="input-tunai" min="{{$total_harga}}" value="0" name="pay" >
+              </div>
+            </h4>
+            <h4 class="d-flex justify-content-between">
+              <span>Kembalian</span>
+              <span class=" fw-bold" id="kembalian">Rp.0</span>
             </h4>
 
             <button class="btn btn-primary w-100 mt-3" type="submit">Booking</button>
@@ -130,3 +140,13 @@
     @endif
   </div>
 @endsection
+@push('scripts')
+    <script>
+      $('#input-tunai').keyup(function (e) { 
+       let tunai = $('#input-tunai').val();
+       let total_harga =  $('#total-harga').val();
+       let kembalian = tunai - total_harga;
+       $('#kembalian').text('Rp.' + kembalian.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+      });
+    </script>
+@endpush

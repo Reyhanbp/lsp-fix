@@ -22,7 +22,7 @@
             <input class="form-control" type="password" name="password" id="password">
           </div>
           <button class="btn btn-primary w-100">Login</button>
-          <p class="mb-0 text-center">belum punya akun ? <a href="{{ route('regis.view') }}">registrasi</a></p>
+          {{-- <p class="mb-0 text-center">belum punya akun ? <a href="{{ route('regis.view') }}">registrasi</a></p> --}}
         </form>
       </div>
     </div>

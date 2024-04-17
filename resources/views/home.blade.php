@@ -75,7 +75,11 @@
   <section>
     <h1 class="mt-3">Tata cara menyewa lapangan</h1>
     <ol>
-      <li>Login atau daftar terlebih dahulu dengan klik tombol "login" atau "daftar" pada kanan atas</li>
+      <li>Masuk ke menu booking</li>
+      <li>Isi kolom nama, no tlp penyewa</li>
+      <li>Pilih Jenis dan Lokasi Lapangan</li>
+      <li>Masukkan tgl mulai-selesai sewa</li>
+      <li>klik checkout</li>
     </ol>
   </section>
 @endsection

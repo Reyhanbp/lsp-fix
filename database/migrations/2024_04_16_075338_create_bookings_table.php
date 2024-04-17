@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('no_tlp');
             $table->double('price');
+            $table->double('pay');
             $table->double('total_price');
             $table->dateTime('date_start');
             $table->dateTime('date_end');

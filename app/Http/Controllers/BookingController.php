@@ -66,6 +66,7 @@ class BookingController extends Controller
             'date_end' => $request->date_end,
             'name' => $request->name,
             'no_tlp' => $request->no_tlp,
+            'pay' => $request->pay
         ]);
 
         return redirect('/')->with('success-booking');
