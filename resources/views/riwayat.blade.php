@@ -1,8 +1,37 @@
 @extends('layouts.main')
 @section('content')
-  <h3 class="mt-5">RIWAYAT TRANSAKSI</h3>
   <div class="">
 
+    <style>
+      @font-face {
+          font-family: 'Plus Jakarta Sans';
+          src: url('fonts/PlusJakartaSans-Medium.ttf');
+      }
+
+      body {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      .back-image {
+          position: absolute;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+          filter: blur(2px);
+      }
+  </style>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb mt-4">
+    <li class="breadcrumb-item"><a style="text-decoration: none" href="{{ route('home') }}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Riwayat Transaksi</li>
+  </ol>
+</nav>
+<div class="card mt-4">
+  <div class="card-header bg-warning">
+    <h3 style="padding-left: 6px; margin-top:4px;">Riwayat Transaksi</h3>
+  </div>
+  <div class="card-body">
     <table class="table table-stripped table-bordered shadow-sm">
       <thead>
         <tr>
@@ -34,4 +63,5 @@
       </tbody>
     </table>
   </div>
+</div>
 @endsection
