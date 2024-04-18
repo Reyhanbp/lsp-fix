@@ -82,7 +82,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-primary">
-                    <h4 style="margin-top: 6px; padding-left: 12px; color: white">Daftar Riwayat Booking</h4>
+                    <h4 style="margin-top: 6px; padding-left: 12px; color: white">Daftar Booking</h4>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -101,19 +101,21 @@
                         </thead>
                         <tbody>
                              <tbody>
-                                @foreach ($bs as $b)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $b->name }}</td>
-                                    <td>{{ $b->no_tlp }}</td>
-                                    <td>{{ $b->lapangan->jenis }}</td>
-                                    <td>{{ $b->lapangan->lokasi }}</td>
-                                    <td>Rp. {{ number_format($b->lapangan->price) }}</td>
-                                    <td>{{ $b->getDateStart() }}</td>
-                                    <td>{{ $b->getDateEnd() }}</td>
-                                    <td>Rp. {{ number_format($b->total_price) }}</td>
-                                </tr>
-                                @endforeach
+                                @if (session('failed-booking')[0] ?? false)
+                                    @foreach (session('failed-booking') as $b)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $b->name }}</td>
+                                            <td>{{ $b->no_tlp }}</td>
+                                            <td>{{ $b->lapangan->lokasi }}</td>
+                                            <td>{{ $b->lapangan->jenis }}</td>
+                                            <td>Rp. {{ number_format($b->lapangan->price) }}</td>
+                                            <td>{{ $b->getDateStart() }}</td>
+                                            <td>{{ $b->getDateEnd() }}</td>
+                                            <td>Rp. {{ number_format($b->total_price) }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </tbody>
                     </table>

@@ -10,6 +10,6 @@ class RiwayatController extends Controller
     public function index()
     {
         $bookings = Booking::all();
-        return view('booking', compact('bookings'));
+        return view('riwayat', compact('bookings'));
     }
 }

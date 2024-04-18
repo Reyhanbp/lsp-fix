@@ -1,9 +1,7 @@
-@extends('layouts.auth')
+@extends('layouts.app')
+
 @section('content')
 <style>
-    .container {
-        margin-top: 50px;
-    }
 
     .card-header {
         background-color: #007bff;
@@ -55,12 +53,13 @@
         }
     }
 </style>
-<div class="container">
+<div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
+                 <div class="card-header">
+                    <h4 class="text-center">Login</h4>
+                </div>
                 <div class="card-body">
                     @if (session('failed'))
                         <div class="alert alert-danger" role="alert">

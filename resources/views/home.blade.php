@@ -2,7 +2,6 @@
 
 @section('content')
 <style>
-
     .card {
         border: none;
     }
@@ -53,22 +52,26 @@
                 <div class="card border-primary">
                     <div class="card-body">
                         <div class="text-center">
-                            <h3 class="mt-3">Tata Cara Penyewaan Lapangan</h3>
+                            <h3 class="mt-3"> Halo Selamat Datang Di Penyewaan ReyGoal</h3>
+                            <h4 class="mt-5"> Cara Menyewa Lapangan</h4>
                         </div>
                         <ol class="mt-4">
-                            <li>Pilih jenis lapangan yang tersedia (Indoor/Outdoor).</li>
-                            <li>Apabila ingin menyewa sepatu atau kostum, Anda dapat memilih opsi penyewaan.</li>
-                            <li>Isi formulir penyewaan dengan lengkap dan benar.</li>
-                            <li>Lakukan pembayaran sesuai dengan petunjuk yang diberikan.</li>
-                            <li>Tunggu konfirmasi dari pihak penyewa.</li>
+                            <li>Tentukan jenis lapangan yang Anda inginkan, apakah Indoor atau Outdoor.</li>
+                            <li>Jika Anda membutuhkan sepatu atau kostum, Anda dapat memilih opsi penyewaan.</li>
+                            <li>Mohon isi data diri Anda dengan lengkap dan jelas.</li>
+                            <li>Lakukan pembayaran sesuai petunjuk yang diberikan.</li>
+                            <li>Setelah itu, tunggu konfirmasi dari pihak penyewa.</li>
                         </ol>
 
-                        <div class="card-group mt-4">
+                        <div class="text-center">
+                            <h4 class="mt-5"> List Biaya Penyewaan Lapangan</h4>
+                        </div>
+                        <div class="card-group mt-4 ">
                             <div class="card border-warning">
                                 <div class="card-header text-center">
                                     Biaya Sewa Lapangan - <span><strong>Indoor</strong></span>
                                 </div>
-                                <div class="card-body ms-5">
+                                <div class="card-body ms-4">
                                     <ul>
                                         <li>Reguler : Rp 300.000/Jam</li>
                                         <li>Matras : Rp 250.000/Jam</li>
@@ -81,7 +84,7 @@
                                 <div class="card-header text-center">
                                     Biaya Sewa Lapangan - <span><strong>Outdoor</strong></span>
                                 </div>
-                                <div class="card-body ms-5">
+                                <div class="card-body ms-4">
                                     <ul>
                                         <li>Reguler : Rp 250.000/Jam</li>
                                         <li>Matras : Rp 200.000/Jam</li>
@@ -122,7 +125,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Modal Konfirmasi Keluar -->
                     </div>
                 </div>
             </div>
